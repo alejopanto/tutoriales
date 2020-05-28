@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista</title>
+</head>
+<body>
+
+    <div id="main">
+        <input type="text" v-model="texto"> <!-- v-model ratrea el dato que se ponga en script -->
+        <p v-bind:title="texto">texto de relleno ... {{ texto }}</p>
+        <!-- v-bind aparece con el valor de texto -->
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '#main',
+           data() {
+               return {
+                texto: "",
+               }
+           },
+        });
+    </script>
+</body>
+</html>

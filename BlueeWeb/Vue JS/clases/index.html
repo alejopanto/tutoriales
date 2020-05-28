@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" id="app">
+        <h1>{{titulo}}</h1>
+
+        <input type="text" v-model="fondo">
+
+        <h4>{{fondo}}</h4>
+
+        <p v-bind:class="['p-3', 'text-white', fondo]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id sapiente beatae possimus odit labore voluptatum mollitia unde? Obcaecati nulla perferendis quibusdam incidunt explicabo totam placeat, id minus dolorum harum!</p>
+
+        <p class="p-3 text-white" :class="{'bg-info' : color, 'bg-danger' : !color}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere totam magni vel dolorem, corrupti voluptas perferendis maxime iusto ab consequuntur! Eaque expedita enim deleniti? Est quos natus ea nam ratione.</p>
+
+        <button class="btn btn-success" @click="color = !color">Cambiar Color</button>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="app.js"></script>
+</html>

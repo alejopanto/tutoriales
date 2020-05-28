@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista</title>
+</head>
+<body>
+
+    <div id="main">
+        <ul>
+            <li v-for="item in people" v-text="item"></li> 
+            <!-- v-for recorre la lista -->
+            <!-- v-text muestra lo que se ingresa -->
+        </ul>
+
+        <input type="text" v-model="name" v-on:keyup.enter="addName">
+        <!-- v-model se enlaza con el name del script -->
+        <!-- v-on es el es cuchador de eventos -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#main',
+            data() {
+                return {
+                    people: ['jose', 'alejandro', 'pantoja', 'giraldo']
+                    // son los datos a mostrar
+                }
+            },
+            name: '',
+            //es quien se ancla al v-model
+            methods: {
+                addName: function(){
+                    this.people.push(this.name);
+                    this.name = '';
+                }
+                //es la funcion que se dispara con el v-on
+            },
+        })
+    </script>
+</body>
+</html>

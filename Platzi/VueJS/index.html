@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Primer ejemplo</title>
+    <link rel="stylesheet" href="./styles.css">
+
+</head>
+<body>
+    <div id="app" v-bind:style="{ background: '#' + color }">
+       <img  
+            v-on:mouseover="toggleShowPrices" 
+            v-on:mouseout="toggleShowPrices"
+            v-bind:src="img" 
+            v-bind:alt="name">  <!-- v-bind me permite poner valores dinamicos -->
+        <h1 
+            v-bind:class="changePercent > 0 ? 'green' : 'red' " >
+            {{ title }}
+            <span v-if="changePercent > 0"> :V </span>  <!-- v-if me hacer una pregunta SI -->
+            <span v-else-if="changePercent < 0"> .I. </span>  <!-- v-else-if cuando no se cumple el if y se tiene otra codicion -->
+            <span v-else> xD </span>  <!-- v-else Cuando no se cumple ningun if -->
+
+            <span v-on:click="toggleShowPrices"> 
+                {{ showPrices ? 'xD' : ':P' }} 
+            </span>     <!-- v-on me permite ver ejecuciones y CLICK es para el mouse -->
+                        <!-- (?) Cuando tenga un valor ('') hacer esto (:) sino ('') esto otro -->
+        </h1>
+
+        
+
+        <input type="number" v-model="value" />
+        <span>{{ convertedValue }}</span>
+
+        <ul v-show="showPrices">  <!-- v-show funciona igual que el if, pero muestra en el DOM -->
+            <li 
+                class="uppercase"
+                v-bind:class="{ orange: p.value == price, yellow: p.value <price, green: p.value >price }"
+                v-for="(p, i) in pricesWihtDay" 
+                v-bind:key="p.day">  <!-- v-for me permite hacer ciclos y iterar -->
+                {{i}} - {{p.day}} - {{p.value}}
+            </li>
+        </ul>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
