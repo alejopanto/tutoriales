@@ -10,58 +10,92 @@
 
 <body>
     <div id="app">
-        <padre></padre>
+        <titulo></titulo>
+        
     </div>
 </body>
 
 <script>
-    Vue.component('padre', {
+
+    Vue.component('titulo', {
         template: /*html*/
-        ` 
-        <div>
-            <h1>Numero {{ numero }}</h1>
-            <hijo></hijo>
-        </div>
-        
+        `
+            <div>
+                <h1>Numero {{numero}}</h1>
+                <hijo></hijo>
+            </div>
         `,
 
         computed: {
+            // De esta manera yo puedo llamar de manera resumida los state de vuex sin el $
             ...Vuex.mapState(['numero'])
-        },
+        }
     });
 
     Vue.component('hijo', {
         template: /*html*/
-        ` 
-        <div>
-            <button @click="aumentar">+</button>
-            <button @click="disminuir(2)">-</button>
-        </div>
-        
+        `
+            <div>
+                <button @click="aumentar">+</button>
+                <button @click="disminuir(2)">-</button>
+                <button @click="obtenerCursos">Opterner Cursos</button>
+                <h1>Numero {{numero}}</h1>
+                <ul>
+                    <li v-for="item of cursos">{{item.title}}</li>
+                </ul>
+            </div>
         `,
 
+        computed: {
+            // De esta manera yo puedo llamar de manera resumida los state de vuex sin el $
+            ...Vuex.mapState(['numero', 'cursos'])
+        },
+
         methods: {
-            ...Vuex.mapMutations(['aumentar', 'disminuir'])
+            ...Vuex.mapMutations(['aumentar', 'disminuir']),
+            ...Vuex.mapActions(['obtenerCursos'])
         },
     });
 
+    // Aqui empieza el vuex, siempre encima de Vue
     const store = new Vuex.Store({
+
+        // Los datos ingresados en el state, son globales tanto para padre como para hijo y se llaman con $store.state
         state: {
-            numero: 10
+            numero: 10,
+            cursos: []
         },
+
+        // Las mutations son los metodos en Vuex y se llaman con $store.commit('')
         mutations: {
-            aumentar(){
-                this.state.numero ++
+            aumentar(state){
+                state.numero++
             },
+
             disminuir(state, n){
-                this.state.numero -= n
+                state.numero -= n
+            },
+
+            llenarCursos(state, cursosAccion){
+                state.cursos = cursosAccion
+            }
+        },
+
+        actions: {
+            obtenerCursos: async function({ commit }){
+                const data = await fetch('http://jsonplaceholder.typicode.com/posts');
+                const cursos = await data.json();
+                commit('llenarCursos', cursos)
             }
         }
-    });
+    })
+
 
     new Vue({
         el: '#app',
-        store: store
+        // Declaro del vuex store: store
+        store
     })
 </script>
+
 </html>
