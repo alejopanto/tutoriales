@@ -38,6 +38,8 @@
     </v-app-bar>
 
     <v-main>
+      <h1 class="mb-5">Rutas /about ... /grid ... /botones ... /navb ... /cards</h1>
+      <hr class="my-5">
       <router-view></router-view>
     </v-main>
   </v-app>
